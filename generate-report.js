@@ -18,18 +18,48 @@ function readReport() {
 
 async function main() {
   const payload = await readReport()
-  const columns = payload.versions.map(each => each.version)
-  const rows = payload.versions.reduce((acc, each) => {
-    acc.add(inspect(each.command))
+  const columns = Array.from(Object.keys(payload.commands).reduce((acc, command) => {
+    for (version in payload.commands[command]) {
+      acc.add(version)
+    }
     return acc
-  }, new Set())
+  }, new Set()));
 
-  const table = ''
+  let table = ''
 
   // Header
   table += '| **Command**'
   table += columns.map(column => `| ${column}`).join('')
   table += '|\n'
+
+  // Divider
+  table += '| -- '
+  table += columns.map(() => `| -- `).join('')
+  table += '|\n'
+
+  // One row for each command
+  for (const command in payload.commands) {
+    table += `| ${command.replace(/\n/g, '')} `
+
+    const data = payload.commands[command]
+    const baseline = data[columns[0]]
+    for (const version of columns) {
+      const duration = data[version]
+      const delta = duration - baseline
+
+      table += `| ${duration}ms `
+
+      if (version !== columns[0]) {
+        table += '_('
+        if (delta > 0) {
+          table += '+'
+        }
+        table += delta.toString()
+        table += 'ms)_ '
+      }
+    }
+    table += '|\n'
+  }
 
   console.log(table)
 }
