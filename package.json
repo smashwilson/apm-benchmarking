@@ -4,6 +4,7 @@
   "description": "Benchmark apm upgrades",
   "main": "work-it.js",
   "scripts": {
+    "start": "node ./work-it.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
