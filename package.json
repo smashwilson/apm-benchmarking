@@ -1,0 +1,23 @@
+{
+  "name": "apm-benchmarking",
+  "version": "1.0.0",
+  "description": "Benchmark apm upgrades",
+  "main": "work-it.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smashwilson/apm-benchmarking.git"
+  },
+  "author": "Ash Wilson <smashwilson@github.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/smashwilson/apm-benchmarking/issues"
+  },
+  "homepage": "https://github.com/smashwilson/apm-benchmarking#readme",
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "fs-extra": "^6.0.1"
+  }
+}
